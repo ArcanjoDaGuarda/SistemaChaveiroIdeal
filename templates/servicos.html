@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Serviços - Sistema Chaveiro Ideal{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header text-center">
+        <h3>Serviços Disponíveis</h3>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <a href="{% url 'adicionar_servico' %}" class="btn btn-primary">Adicionar</a>
+            <a href="{% url 'servicos_para_excluir' %}" class="btn btn-danger">Excluir</a>
+            <a href="{% url 'pesquisar_servico' %}" class="btn btn-info">Pesquisar</a>
+        </div>
+        <ul class="list-group">
+            {% for servico in servicos %}
+                <li class="list-group-item">
+                    <h5>{{ servico.nome }}</h5>
+                    <p>{{ servico.descricao }}</p>
+                    <a href="{% url 'alterar_servico' id=servico.id %}" class="btn btn-warning">Alterar</a>
+                    <a href="{% url 'confirmar_exclusao' id=servico.id %}" class="btn btn-danger">Excluir</a>
+                </li>
+            {% empty %}
+                <li class="list-group-item">Nenhum serviço disponível.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

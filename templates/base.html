@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema Chaveiro Ideal{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+</head>
+<body style="background-color: #f8f9fa;">
+
+    <!-- Bloco de mensagens -->
+    <div class="container mt-3">
+        {% if messages %}
+            <div class="alert alert-info">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="d-flex">
+        <!-- Menu lateral -->
+        <div class="bg-light p-3" style="width: 250px; height: 100vh;">
+            <h4>Menu</h4>
+            <ul class="list-unstyled">
+                <li><a href="{% url 'home' %}" class="text-decoration-none">Página Inicial</a></li>
+                <li><a href="{% url 'servicos' %}" class="text-decoration-none">Serviços</a></li>
+                <li><a href="#" class="text-decoration-none">Estoques</a></li>
+                <li><a href="#" class="text-decoration-none">Relatórios</a></li>
+                <li><a href="#" class="text-decoration-none">Configurações</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link text-decoration-none p-0 m-0" style="border: none; background: none; color: #0d6efd;">
+                            Sair
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div class="container-fluid p-5" style="flex-grow: 1;">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

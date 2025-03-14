@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir Serviços{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header text-center">
+        <h3>Escolha o Serviço para Excluir</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            {% for servico in servicos %}
+                <li class="list-group-item">
+                    <h5>{{ servico.nome }}</h5>
+                    <p>{{ servico.descricao }}</p>
+                    <!-- Link para a página de confirmação de exclusão -->
+                    <a href="{% url 'confirmar_exclusao' id=servico.id %}" class="btn btn-danger">Excluir</a>
+                </li>
+            {% empty %}
+                <li class="list-group-item">Nenhum serviço disponível para exclusão.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
